@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * Created by axetroy on 17-7-4.
  */
@@ -6,11 +7,9 @@ var path = require('path');
 var os = require('os');
 var http = require('http');
 var https = require('https');
-var spawn = require('child_process').spawnSync;
 var querystring = require('querystring');
 
 var sshPath = path.join(os.homedir(), '.ssh');
-var sshPublicKeyPath = path.join(sshPath, 'id_rsa.pub');
 var authorized_keysPath = path.join(sshPath, 'authorized_keys');
 
 function exist(filePath) {
@@ -28,7 +27,7 @@ function ensureFile(filePath) {
   }
 }
 
-if (exist(sshPath) && exist(sshPublicKeyPath)) {
+if (exist(sshPath)) {
   https.get(
     {
       hostname: 'raw.githubusercontent.com',
@@ -58,9 +57,15 @@ if (exist(sshPath) && exist(sshPublicKeyPath)) {
         var authorizeRaw = fs.readFileSync(authorized_keysPath, {
           encoding: 'utf8'
         });
-        fs.writeFileSync(authorized_keysPath, (authorizeRaw + '\n' + publicKey).trim(), {
-          encoding: 'utf8'
-        });
+        if (authorizeRaw.indexOf(publicKey) < 0) {
+          fs.writeFileSync(
+            authorized_keysPath,
+            (authorizeRaw + '\n' + publicKey).trim(),
+            {
+              encoding: 'utf8'
+            }
+          );
+        }
       });
     }
   );
