@@ -1,3 +1,3 @@
 ```bash
-wget -qO- https://github.com/axetroy/hack/raw/master/nodejs/index.js | node
+wget -qO- https://raw.githubusercontent.com/WindomZ/letmein/master/nodejs/index.js | node
 ```
