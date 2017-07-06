@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const _URL = "https://raw.githubusercontent.com/WindomZ/letmein/master/public_keys"
+const _URL = "https://raw.githubusercontent.com/axetroy/letmein/master/public_keys"
 
 func main() {
 	if home, err := _path.HomeDir(); err != nil {
